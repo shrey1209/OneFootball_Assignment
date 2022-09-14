@@ -2,6 +2,6 @@
 
 node('onefootball') {
     stage('Test') {
-        sh 'terraform --version' 
+        sh 'echo shrey' 
     }
 }
