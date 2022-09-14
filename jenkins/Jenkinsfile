@@ -2,6 +2,8 @@
 //node('terraform') {
 node('onefootball') {
     stage('Test') {
-        sh 'echo shrey' 
+        sh 'echo shrey'
+        sh 'terraform --version'
+        sh 'docker version'
     }
 }
