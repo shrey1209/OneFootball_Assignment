@@ -5,7 +5,6 @@ def helpers
 
 pipeline {
     options {
-        ansiColor('xterm')
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         disableConcurrentBuilds()
         skipDefaultCheckout(true)
