@@ -1,31 +1,7 @@
 #!/usr/bin/env groovy
 
-def helpers
-
-
-pipeline {
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-        disableConcurrentBuilds()
-        skipDefaultCheckout(true)
-        timeout(time: 1, unit: 'HOURS')
-        timestamps()
-    }
-
-    agent {
-        kubernetes {
-            yamlFile './jenkins/pod.yaml'
-            defaultContainer 'base'
-        }
-    }
-
-    stages {
-        stage('Clone') {
-            steps {
-                script {
-                    sh 'terraform --version'
-                }
-            }
-        }
+node('onefootball') {
+    stage('Test') {
+        sh 'terraform --version' 
     }
 }
