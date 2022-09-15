@@ -38,7 +38,7 @@ resource "aws_ebs_volume" "k8s-volume" {
   size              = 8
 
   tags = {
-    Name = "${local.server_type}_volume"
+    Name = "${local.tag}_volume"
   }
 }
 
