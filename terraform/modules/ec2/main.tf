@@ -23,11 +23,28 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "k8s-server" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
+  availability_zone = "eu-central-1a"
 
   tags = {
     Name = local.tag
   }
 }
+
+resource "aws_ebs_volume" "k8s-volume" {
+  availability_zone = "eu-central-1a"
+  size              = 8
+
+  tags = {
+    Name = "${local.server_type}_volume"
+  }
+}
+
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.k8s-volume.id
+  instance_id = aws_instance.k8s-server.id
+}
+
